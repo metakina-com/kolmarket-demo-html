@@ -4,917 +4,543 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kolmarket - KOL影响力交易所与社区 | AVM估值</title>
-
+    
     <meta name="description" content="加入Kolmarket社区，与您喜爱的KOL互动！交易KOL代币和NFT权益卡，基于AVM估值系统发现、投资全球创作者影响力。支持X, YouTube, TikTok等。">
-    <link rel="alternate" hreflang="zh-CN" href="https://your-kolmarket-domain.com/" />
-    <link rel="alternate" hreflang="en" href="https://your-kolmarket-domain.com/en/" />
-    <link rel="alternate" hreflang="x-default" href="https://your-kolmarket-domain.com/" />
+    <meta name="keywords" content="Kolmarket, KOL, NFT, Token, 影响力交易所, AVM估值, 粉丝经济, 创作者经济, 社交交易">
+    <link rel="canonical" href="https://kolmarket.io/">
+    <link rel="alternate" hreflang="en" href="https://kolmarket.io/en/">
+    <link rel="alternate" hreflang="x-default" href="https://kolmarket.io/">
+    <link rel="icon" href="https://placehold.co/32x32/0a0e1a/7B61FF?text=K" type="image/png">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
-        /* Custom styles (unchanged) */
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #131722;
-            color: #d1d4dc;
+            font-family: 'Poppins', '思源黑体', sans-serif;
+            background-color: #0a0e1a;
+            color: #E0EFFF;
         }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #1e222d; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb { background: #555; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #666; }
-        .light-theme { background-color: #ffffff; color: #131722; }
-        .light-theme .bg-gray-800 { background-color: #f9fafb; }
-        .light-theme .bg-gray-900 { background-color: #f3f4f6; }
-        .light-theme .text-gray-300 { color: #6b7280; }
-        .light-theme .text-gray-400 { color: #9ca3af; }
-        .light-theme .border-gray-700 { border-color: #e5e7eb; }
-        .light-theme ::-webkit-scrollbar-track { background: #f1f1f1; }
-        .light-theme ::-webkit-scrollbar-thumb { background: #ccc; }
-        .light-theme ::-webkit-scrollbar-thumb:hover { background: #bbb; }
-        .text-buy { color: #0ecb81; }
-        .text-sell { color: #f6465d; }
-        .bg-buy-light { background-color: rgba(14, 203, 129, 0.1); }
-        .bg-sell-light { background-color: rgba(246, 70, 93, 0.1); }
-        .market-tab {
-            padding: 0.5rem 1rem;
-            border-bottom: 2px solid transparent;
-            color: #848e9c;
-            cursor: pointer;
-            transition: color 0.2s ease, border-color 0.2s ease;
+        .brand-gradient-text {
+            background: linear-gradient(90deg, #7B61FF, #00BCD4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand-gradient-bg {
+            background: linear-gradient(90deg, #7B61FF, #00BCD4);
+        }
+        .card {
+            background-color: rgba(23, 27, 43, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .table-header {
+            background-color: rgba(23, 27, 43, 0.9);
+        }
+        .table-row:hover {
+            background-color: rgba(30, 35, 55, 0.9);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #7B61FF, #5e4bd8);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(123, 97, 255, 0.4);
+        }
+         .btn-secondary {
+            background-color: transparent;
+            border: 1px solid #7B61FF;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(123, 97, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
             font-weight: 500;
         }
-        .market-tab:hover {
-            color: #eaecef;
+        .tab-btn.active {
+            color: #00BCD4;
+            border-bottom-color: #00BCD4;
         }
-        .market-tab-active {
-            color: #f0b90b;
-            border-bottom-color: #f0b90b;
+        .market-content { display: none; }
+        .market-content.active { display: block; }
+        #nft-market.active, #index-market.active { display: grid; }
+        .mobile-menu { display: none; }
+        .sort-btn {
+            background-color: rgba(41, 51, 78, 0.5);
+            border: 1px solid #374151;
+            transition: all 0.2s ease;
         }
-        .hero-bg {
-             background: linear-gradient(rgba(19, 23, 34, 0.8), rgba(19, 23, 34, 0.9)), url('https://placehold.co/1920x600/2a2f3b/cccccc?text=Kolmarket+Hero+Banner'); /* [图片：Kolmarket 横幅背景] */
-             background-size: cover;
-             background-position: center;
+        .sort-btn:hover {
+            background-color: rgba(55, 65, 81, 0.7);
         }
-        .light-theme .hero-bg {
-             background: linear-gradient(rgba(243, 244, 246, 0.8), rgba(243, 244, 246, 0.9)), url('https://placehold.co/1920x600/e5e7eb/374151?text=Kolmarket+Hero+Banner'); /* [图片：Kolmarket 横幅背景] */
+        .sort-btn.active {
+            background-color: #7B61FF;
+            border-color: #7B61FF;
+            color: white;
         }
-        .avm-feature-icon {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(240, 185, 11, 0.1);
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        .light-theme .avm-feature-icon {
-             background-color: rgba(240, 185, 11, 0.15);
-        }
-        .lang-dropdown {
-            position: absolute;
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             right: 0;
-            top: 100%;
-            margin-top: 0.5rem;
-            background-color: #1e222d;
-            border: 1px solid #374151;
-            border-radius: 0.375rem;
-            padding-top: 0.25rem;
-            padding-bottom: 0.25rem;
-            min-width: 8rem;
-            z-index: 50;
-            display: none;
-        }
-        .light-theme .lang-dropdown {
-            background-color: #ffffff;
-            border-color: #e5e7eb;
-        }
-        .lang-dropdown a {
-            display: block;
-            padding: 0.5rem 1rem;
-            color: #d1d4dc;
-            font-size: 0.875rem;
-        }
-        .light-theme .lang-dropdown a {
-             color: #374151;
-        }
-        .lang-dropdown a:hover {
-            background-color: #374151;
-            color: #ffffff;
-        }
-         .light-theme .lang-dropdown a:hover {
-            background-color: #f3f4f6;
-            color: #1f2937;
-        }
-        .platform-icon {
-            font-size: 2.5rem;
-            color: #9ca3af;
-            transition: color 0.3s ease;
-        }
-        .platform-icon:hover {
-            color: #f0b90b;
-        }
-        .featured-kol-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #374151;
-            transition: transform 0.3s ease;
-        }
-        .featured-kol-avatar:hover {
-            transform: scale(1.1);
-            border-color: #f0b90b;
-        }
-        .realtime-avm-card {
-            background-color: #1e222d;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid #374151;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-        .realtime-avm-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .light-theme .realtime-avm-card {
-            background-color: #ffffff;
-            border-color: #e5e7eb;
-        }
-         .light-theme .realtime-avm-card:hover {
-             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-         }
-        .market-content {
-            display: none;
-        }
-        .market-content-active {
-            display: grid;
-        }
-        .benefit-card-icon {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(110, 118, 138, 0.1);
-            border-radius: 0.375rem;
-            display: inline-flex;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            display: none; /* Hidden by default */
             align-items: center;
             justify-content: center;
-            margin-bottom: 0.75rem;
-            color: #9ca3af;
         }
-        .light-theme .benefit-card-icon {
-             background-color: rgba(209, 213, 219, 0.5);
-             color: #4b5563;
+        .modal-content {
+            background-color: #101424;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-        .community-card {
-            background-color: #1e222d;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid #374151;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        .progress-bar-bg { background-color: #2a2f45; }
+        .progress-bar { background: linear-gradient(90deg, #7B61FF, #00BCD4); }
+        .follow-btn-followed {
+            background: #2a2f45;
+            cursor: default;
         }
-        .community-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .light-theme .community-card {
-            background-color: #ffffff;
-            border-color: #e5e7eb;
-        }
-        .light-theme .community-card:hover {
-             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-         }
     </style>
 </head>
-<body class="text-sm">
+<body class="text-base">
 
-    <div class="flex flex-col min-h-screen">
+    <div id="app-container">
 
-        <header class="bg-gray-900 border-b border-gray-700 px-4 py-3 flex items-center justify-between flex-shrink-0 sticky top-0 z-50">
-            <div class="flex items-center space-x-4">
-                <a href="#" class="text-xl font-bold text-yellow-500">Kolmarket</a>
-                <button class="md:hidden text-gray-300 hover:text-white focus:outline-none">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-
-            <nav class="hidden md:flex items-center space-x-4 lg:space-x-6 text-gray-300 text-xs lg:text-sm">
-                <a href="#market-overview" class="hover:text-white" data-i18n-key="nav.market">市场</a>
-                <a href="#kol-discovery" class="hover:text-white" data-i18n-key="nav.discover">发现KOL</a>
-                <a href="community.html" class="hover:text-white" data-i18n-key="nav.community">社区</a>
-                <a href="/trade.html" class="hover:text-white" data-i18n-key="nav.trade">交易</a>
-                <div class="h-4 border-l border-gray-600"></div>
-                <a href="#discover-valuation" class="text-yellow-400 hover:text-yellow-300 font-semibold" data-i18n-key="nav.valuation_query">KOL估值查询</a>
-                <a href="/launchpad" class="hover:text-white" data-i18n-key="nav.launchpad">发行资产</a>
-                <a href="#avm-section" class="hover:text-white" data-i18n-key="nav.avm">AVM详情</a>
-                <a href="#realtime-avm" class="hover:text-white" data-i18n-key="nav.realtime_avm">实时追踪</a>
-                <a href="/wallet" class="hover:text-white" data-i18n-key="nav.wallet">钱包</a>
-            </nav>
-
-            <div class="flex items-center space-x-2 sm:space-x-4">
-                <button class="text-gray-300 hover:text-white md:hidden">
-                    <i class="fas fa-search"></i>
-                </button>
-                <div class="relative hidden md:block">
-                    <input type="text" placeholder="搜索KOL/代币/NFT..." class="bg-gray-800 border border-gray-700 rounded-md py-1 px-2 text-xs lg:text-sm focus:outline-none focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500" data-i18n-key="nav.search_placeholder" aria-label="搜索KOL、代币或NFT">
-                    <i class="fas fa-search absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 text-xs"></i>
-                </div>
-                <a href="/login" class="text-gray-300 hover:text-white text-xs sm:text-sm" data-i18n-key="nav.login">登录</a>
-                <a href="/register" class="bg-yellow-500 text-gray-900 px-2 sm:px-3 py-1 rounded-md text-xs sm:text-sm font-semibold hover:bg-yellow-600" data-i18n-key="nav.register">注册</a>
-                <button id="theme-toggle" class="text-gray-300 hover:text-white" aria-label="切换主题"><i class="fas fa-sun"></i></button>
-                <div class="relative">
-                    <button id="lang-switcher-button" class="flex items-center text-gray-300 hover:text-white" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-globe mr-1 text-sm sm:text-base"></i>
-                        <span class="hidden sm:inline" data-i18n-key="nav.language">中文</span>
-                        <i class="fas fa-chevron-down text-xs ml-1"></i>
-                    </button>
-                    <div id="lang-dropdown" class="lang-dropdown" aria-labelledby="lang-switcher-button">
-                        <a href="#" lang="zh-CN" data-lang="zh-CN">简体中文</a>
-                        <a href="/en/" lang="en" data-lang="en">English</a>
+        <header class="fixed top-0 left-0 right-0 z-50 card">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <div class="flex-shrink-0">
+                        <a href="#" class="text-2xl font-bold">
+                            <span class="brand-gradient-text">Kolmarket</span>
+                        </a>
+                    </div>
+                    <nav class="hidden lg:flex items-center space-x-8 text-sm">
+                        <a href="#market" class="text-gray-300 hover:text-cyan-400 transition">行情</a>
+                        <a href="#kol-list" class="text-gray-300 hover:text-cyan-400 transition">发现KOL</a>
+                        <a href="#community" class="text-gray-300 hover:text-cyan-400 transition">社区</a>
+                        <a href="#avm-details" class="text-gray-300 hover:text-cyan-400 transition">AVM估值</a>
+                        <a href="#" class="text-gray-300 hover:text-cyan-400 transition">NFT市场</a>
+                    </nav>
+                    <div class="flex items-center space-x-4">
+                        <a href="#" class="hidden sm:block btn-secondary px-4 py-2 rounded-lg text-sm font-semibold">登录</a>
+                        <a href="#" class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold text-white">注册</a>
+                        <button id="mobile-menu-button" class="lg:hidden text-2xl">
+                            <i class="fas fa-bars"></i>
+                        </button>
                     </div>
                 </div>
-             </div>
+            </div>
+            <div id="mobile-menu" class="hidden lg:hidden card">
+                <nav class="flex flex-col items-center space-y-4 p-4">
+                    <a href="#market" class="hover:text-cyan-400 transition">行情</a>
+                    <a href="#kol-list" class="hover:text-cyan-400 transition">发现KOL</a>
+                    <a href="#community" class="hover:text-cyan-400 transition">社区</a>
+                    <a href="#avm-details" class="hover:text-cyan-400 transition">AVM估值</a>
+                    <a href="#" class="hover:text-cyan-400 transition">NFT市场</a>
+                    <a href="#" id="mobile-apply-kol-btn" class="font-bold text-cyan-400 hover:text-cyan-300 transition mt-4">KOL入驻</a>
+                </nav>
+            </div>
         </header>
 
-        <main class="flex-grow">
-
-            <section class="hero-bg text-white py-16 md:py-24 lg:py-32 text-center"> <div class="container mx-auto px-4">
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4" data-i18n-key="hero.title">Kolmarket</h1>
-                    <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6" data-i18n-key="hero.subtitle_v2">交易KOL代币与NFT，<span class="text-yellow-400">AVM</span> 精准估值</h2>
-                    <p class="text-base md:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 max-w-3xl mx-auto" data-i18n-key="hero.description_v2">
-                        全球首个基于大数据的KOL影响力量化与交易平台。利用先进的 <span class="font-semibold">AVM估值系统</span>，发现、投资并交易你喜爱的创作者 <span class="font-semibold">个人代币</span> 和 <span class="font-semibold">NFT权益卡</span>。
+        <main class="pt-20">
+            <section class="relative py-20 md:py-32 text-center overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] to-[#1a1f33] opacity-50 z-0"></div>
+                <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-10" style="background-image: url('https://placehold.co/1920x1080/0a0e1a/FFFFFF?text=Network+Graph');"></div>
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4" style="font-family: 'Montserrat', sans-serif;">
+                        量化影响力, <span class="brand-gradient-text">交易新价值</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                        全球首个KOL影响力资产交易所，将创作者的社会影响力转化为可交易的数字资产。投资你所热爱的，共享成长价值。
                     </p>
                     <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="/register" class="w-full sm:w-auto bg-yellow-500 text-gray-900 px-6 sm:px-8 py-2 sm:py-3 rounded-md text-base sm:text-lg font-semibold hover:bg-yellow-600 transition duration-300" data-i18n-key="hero.button_register">立即注册</a>
-                        <a href="#discover-valuation" class="w-full sm:w-auto bg-transparent border-2 border-yellow-500 text-yellow-500 px-6 sm:px-8 py-2 sm:py-3 rounded-md text-base sm:text-lg font-semibold hover:bg-yellow-500 hover:text-gray-900 transition duration-300" data-i18n-key="hero.button_kol_valuation">我是KOL，查询估值</a>
+                        <a href="#market" id="explore-now-btn" class="btn-primary w-full sm:w-auto text-white font-bold py-3 px-8 rounded-lg">立即探索</a>
+                        <a href="#" id="apply-kol-btn" class="btn-secondary w-full sm:w-auto text-white font-bold py-3 px-8 rounded-lg">我是KOL，申请入驻</a>
                     </div>
                 </div>
             </section>
 
-            <section id="market-overview" class="py-12 md:py-16 bg-gray-800">
-                <div class="container mx-auto px-4">
-                    <h2 class="text-2xl md:text-3xl font-semibold text-center mb-6" data-i18n-key="market.title">探索交易市场</h2>
-                    <div class="flex justify-center border-b border-gray-700 mb-8 sm:mb-10 text-sm sm:text-base" id="market-tabs">
-                        <button class="market-tab market-tab-active px-3 sm:px-4" data-target="#kol-token-market" data-i18n-key="market.tab_token">KOL 代币</button>
-                        <button class="market-tab px-3 sm:px-4" data-target="#nft-market" data-i18n-key="market.tab_nft">NFT 权益卡</button>
-                        <button class="market-tab px-3 sm:px-4" data-target="#index-market" data-i18n-key="market.tab_index">影响力指数</button>
+            <section id="market" class="py-20 md:py-28">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">行情中心</h2>
+                    <div id="market-tabs" class="flex justify-center border-b border-gray-700 mb-8">
+                        <button class="tab-btn active" data-target="#kol-token-market">KOL 代币</button>
+                        <button class="tab-btn" data-target="#nft-market">NFT 权益卡</button>
+                        <button class="tab-btn" data-target="#index-market">影响力指数 (AVM)</button>
                     </div>
-
-                    <div id="kol-token-market" class="market-content market-content-active grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
-                        <div class="bg-gray-900 p-4 sm:p-6 rounded-lg">
-                            <h3 class="text-base sm:text-lg font-semibold mb-2">KOL_A/USDT</h3>
-                            <div class="text-xl sm:text-2xl text-buy mb-1">1.2345</div>
-                            <div class="text-buy text-sm">+5.67%</div>
-                        </div>
-                        <div class="bg-gray-900 p-4 sm:p-6 rounded-lg">
-                            <h3 class="text-base sm:text-lg font-semibold mb-2">KOL_B/USDT</h3>
-                            <div class="text-xl sm:text-2xl text-sell mb-1">0.8765</div>
-                            <div class="text-sell text-sm">-2.34%</div>
-                        </div>
-                        <div class="bg-gray-900 p-4 sm:p-6 rounded-lg">
-                            <h3 class="text-base sm:text-lg font-semibold mb-2">KOL_C/ETH</h3>
-                            <div class="text-xl sm:text-2xl text-buy mb-1">0.0012</div>
-                            <div class="text-buy text-sm">+10.1%</div>
-                        </div>
-                        <div class="bg-gray-900 p-4 sm:p-6 rounded-lg">
-                            <h3 class="text-base sm:text-lg font-semibold mb-2">KOL_D/USDT</h3>
-                            <div class="text-xl sm:text-2xl text-buy mb-1">3.4567</div>
-                            <div class="text-buy text-sm">+8.12%</div>
-                        </div>
-                    </div>
-
-                    <div id="nft-market" class="market-content grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
-                         <div class="bg-gray-900 p-4 rounded-lg text-left">
-                            <img src="https://placehold.co/400x250/2a2f3b/cccccc?text=NFT+Content+Access" alt="[图片：KOL A 专属内容访问卡]" class="w-full h-32 sm:h-40 object-cover rounded-md mb-3">
-                            <h3 class="font-semibold text-sm sm:text-base mb-1">KOL A 专属内容访问卡</h3>
-                            <p class="text-xs text-gray-400 mb-2">权益类型: <span class="font-medium text-purple-400">商品/内容</span></p>
-                            <p class="text-xs text-gray-400 mb-2">权益详情: 解锁独家幕后花絮视频</p>
-                            <div class="flex justify-between items-center mt-3">
-                                <span class="text-base sm:text-lg font-bold text-yellow-500">50 USDT</span>
-                                <span class="text-xs text-gray-400">固定价格</span>
+                    
+                    <div>
+                        <div id="kol-token-market" class="market-content active">
+                            <div class="flex flex-wrap items-center gap-2 mb-4">
+                                <span class="text-gray-400 text-sm mr-2">排序:</span>
+                                <button class="sort-btn text-xs px-3 py-1 rounded-full active" data-sort="market_cap">按市值</button>
+                                <button class="sort-btn text-xs px-3 py-1 rounded-full" data-sort="avm">按AVM指数</button>
+                                <button class="sort-btn text-xs px-3 py-1 rounded-full" data-sort="change">按24H涨跌</button>
+                                <button class="sort-btn text-xs px-3 py-1 rounded-full" data-sort="holders">按持有人数</button>
+                            </div>
+                            <div class="card rounded-xl overflow-hidden">
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full text-sm">
+                                        <thead class="table-header">
+                                            <tr>
+                                                <th class="p-4 text-left font-semibold">KOL / 资产</th>
+                                                <th class="p-4 text-right font-semibold">最新价格 (USDT)</th>
+                                                <th class="p-4 text-right font-semibold hidden sm:table-cell">市值</th>
+                                                <th class="p-4 text-right font-semibold hidden lg:table-cell">持有人数</th>
+                                                <th class="p-4 text-right font-semibold hidden md:table-cell">AVM指数</th>
+                                                <th class="p-4 text-right font-semibold">24H 涨跌</th>
+                                                <th class="p-4 text-right font-semibold">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                         <div class="bg-gray-900 p-4 rounded-lg text-left">
-                            <img src="https://placehold.co/400x250/2a2f3b/cccccc?text=NFT+VIP+Event" alt="[图片：KOL B VIP 活动参与卡]" class="w-full h-32 sm:h-40 object-cover rounded-md mb-3">
-                            <h3 class="font-semibold text-sm sm:text-base mb-1">KOL B VIP 活动参与卡</h3>
-                            <p class="text-xs text-gray-400 mb-2">权益类型: <span class="font-medium text-purple-400">商品/服务</span></p>
-                            <p class="text-xs text-gray-400 mb-2">权益详情: 参与年度粉丝见面会资格</p>
-                            <div class="flex justify-between items-center mt-3">
-                                <span class="text-base sm:text-lg font-bold text-yellow-500">1.2 ETH</span>
-                                <span class="text-xs text-gray-400">拍卖中</span>
-                            </div>
-                        </div>
-                        <div class="bg-gray-900 p-4 rounded-lg text-left">
-                            <img src="https://placehold.co/400x250/2a2f3b/cccccc?text=NFT+Vote" alt="[图片：KOL C 特权投票卡]" class="w-full h-32 sm:h-40 object-cover rounded-md mb-3">
-                            <h3 class="font-semibold text-sm sm:text-base mb-1">KOL C 特权投票卡</h3>
-                             <p class="text-xs text-gray-400 mb-2">权益类型: <span class="font-medium text-blue-400">互动/治理</span></p>
-                            <p class="text-xs text-gray-400 mb-2">权益详情: 参与下次直播主题投票 (1票)</p>
-                            <div class="flex justify-between items-center mt-3">
-                                <span class="text-base sm:text-lg font-bold text-yellow-500">10 USDT</span>
-                                <span class="text-xs text-gray-400">固定价格</span>
-                            </div>
-                        </div>
-                         <div class="bg-gray-900 p-4 rounded-lg text-left">
-                            <img src="https://placehold.co/400x250/2a2f3b/cccccc?text=NFT+Merch" alt="[图片：KOL D 限量周边购买卡]" class="w-full h-32 sm:h-40 object-cover rounded-md mb-3">
-                            <h3 class="font-semibold text-sm sm:text-base mb-1">KOL D 限量周边购买卡</h3>
-                            <p class="text-xs text-gray-400 mb-2">权益类型: <span class="font-medium text-purple-400">商品/购买权</span></p>
-                            <p class="text-xs text-gray-400 mb-2">权益详情: 优先购买限量版联名T恤</p>
-                            <div class="flex justify-between items-center mt-3">
-                                <span class="text-base sm:text-lg font-bold text-yellow-500">25 USDT</span>
-                                <span class="text-xs text-gray-400">固定价格</span>
-                            </div>
-                        </div>
-                    </div>
 
-                     <div id="index-market" class="market-content grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
-                        <div class="bg-gray-900 p-4 sm:p-6 rounded-lg">
-                            <h3 class="text-base sm:text-lg font-semibold mb-2">游戏KOL指数 (GAME)</h3>
-                            <div class="text-xl sm:text-2xl text-sell mb-1">1250.5</div>
-                            <div class="text-sell text-sm">-1.5%</div>
-                        </div>
-                         <div class="bg-gray-900 p-4 sm:p-6 rounded-lg">
-                            <h3 class="text-base sm:text-lg font-semibold mb-2">美妆KOL指数 (BEAUTY)</h3>
-                            <div class="text-xl sm:text-2xl text-buy mb-1">980.2</div>
-                            <div class="text-buy text-sm">+2.8%</div>
-                        </div>
-                         <div class="bg-gray-900 p-4 sm:p-6 rounded-lg">
-                            <h3 class="text-base sm:text-lg font-semibold mb-2">亚洲KOL指数 (ASIA)</h3>
-                            <div class="text-xl sm:text-2xl text-buy mb-1">2100.0</div>
-                            <div class="text-buy text-sm">+0.5%</div>
-                        </div>
-                         <div class="bg-gray-900 p-4 sm:p-6 rounded-lg">
-                            <h3 class="text-base sm:text-lg font-semibold mb-2">全球Top100指数 (TOP100)</h3>
-                            <div class="text-xl sm:text-2xl text-sell mb-1">5500.8</div>
-                            <div class="text-sell text-sm">-0.2%</div>
-                        </div>
-                    </div>
+                        <div id="nft-market" class="market-content grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
 
-                    <div class="text-center mt-8">
-                        <a href="/trade.html" class="text-yellow-500 hover:text-yellow-400 font-semibold text-sm sm:text-base" data-i18n-key="market.go_to_trade">
-                            前往交易中心 <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
+                        <div id="index-market" class="market-content grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                    </div>
+                     <div class="text-center mt-8">
+                        <a href="#" class="font-semibold text-cyan-400 hover:text-cyan-300 transition">查看完整市场 →</a>
                     </div>
                 </div>
             </section>
 
-            <section id="discover-valuation" class="py-12 md:py-16 bg-gray-900 text-center">
-                 <div class="container mx-auto px-4">
-                     <h2 class="text-2xl md:text-3xl font-semibold mb-2" data-i18n-key="valuation.title">发现您的影响力价值</h2>
-                     <p class="text-base md:text-lg text-yellow-400 mb-4 font-medium" data-i18n-key="valuation.subtitle_kol">（专为 KOL 设计）</p>
-                     <p class="text-base md:text-lg text-gray-400 mb-8 max-w-2xl mx-auto" data-i18n-key="valuation.description">
-                         想知道您的影响力值多少？输入您的主要社交媒体账号链接或名称，利用 Kolmarket 强大的 AVM 系统查询您的实时估值，并了解如何将其转化为可交易的数字资产。
-                     </p>
-                     <div class="max-w-xl mx-auto flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
-                         <input type="text"
-                                placeholder="输入社交媒体链接或名称"
-                                class="flex-grow w-full sm:w-auto bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-base focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-gray-500"
-                                data-i18n-key="valuation.input_placeholder"
-                                aria-label="输入社交媒体链接或名称">
-                         <button type="button" class="bg-yellow-500 text-gray-900 px-6 sm:px-8 py-2 sm:py-3 rounded-md text-base sm:text-lg font-semibold hover:bg-yellow-600 transition duration-300 w-full sm:w-auto flex-shrink-0" data-i18n-key="valuation.button_query">
-                             <i class="fas fa-search mr-2"></i>查询估值
-                         </button>
-                     </div>
-                     <p class="text-sm sm:text-base text-gray-400" data-i18n-key="valuation.issue_guide_prompt">
-                         获得估值后，<a href="/issue-guide" class="text-yellow-500 hover:text-yellow-400 underline" data-i18n-key="valuation.issue_guide_link">了解如何发行您的专属 Token 或 NFT</a>。
-                     </p>
-                 </div>
-            </section>
-
-            <section id="avm-section" class="py-12 md:py-16 bg-gray-800">
-                <div class="container mx-auto px-4 text-center">
-                    <h2 class="text-2xl md:text-3xl font-semibold mb-4" data-i18n-key="avm.title">核心技术：<span class="text-yellow-400">AVM</span> 影响力估值系统</h2>
-                    <p class="text-base md:text-lg text-gray-400 mb-10 sm:mb-12 max-w-3xl mx-auto" data-i18n-key="avm.description">
-                        Kolmarket 独有的自动估值模型 (AVM)，融合海量数据与智能算法，为您提供最接近真实价值的KOL影响力评估。
-                    </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                        <div class="px-4">
-                            <div class="avm-feature-icon mx-auto"> <i class="fas fa-database text-yellow-500 text-2xl"></i>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2" data-i18n-key="avm.feature1_title">多源数据融合</h3>
-                            <p class="text-sm sm:text-base text-gray-400" data-i18n-key="avm.feature1_desc">整合社交媒体、第三方平台及链上交易数据，全面捕捉影响力信号。</p>
-                        </div>
-                        <div class="px-4">
-                            <div class="avm-feature-icon mx-auto">
-                                <i class="fas fa-cubes text-yellow-500 text-2xl"></i>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2" data-i18n-key="avm.feature2_title">多维度评估</h3>
-                            <p class="text-sm sm:text-base text-gray-400" data-i18n-key="avm.feature2_desc">涵盖粉丝质量、内容表现、互动参与、商业转化、增长潜力等关键维度。</p>
-                        </div>
-                        <div class="px-4">
-                            <div class="avm-feature-icon mx-auto">
-                                <i class="fas fa-clock text-yellow-500 text-2xl"></i>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2" data-i18n-key="avm.feature3_title">实时动态调整</h3>
-                            <p class="text-sm sm:text-base text-gray-400" data-i18n-key="avm.feature3_desc">7x24小时监测数据变化，实时更新估值，反映最新市场动态与事件影响。</p>
-                        </div>
-                        <div class="px-4">
-                            <div class="avm-feature-icon mx-auto">
-                                <i class="fas fa-brain text-yellow-500 text-2xl"></i>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2" data-i18n-key="avm.feature4_title">AI 驱动模型</h3>
-                            <p class="text-sm sm:text-base text-gray-400" data-i18n-key="avm.feature4_desc">利用机器学习算法持续优化模型，提升估值准确性与预测能力。</p>
-                        </div>
-                    </div>
-                     <div class="mt-10 sm:mt-12">
-                         <a href="/avm-details" class="text-yellow-500 hover:text-yellow-400 font-semibold text-sm sm:text-base" data-i18n-key="avm.learn_more">
-                            深入了解 AVM 技术细节 <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                     </div>
-                </div>
-            </section>
-
-            <section id="supported-platforms" class="py-10 sm:py-12 bg-gray-900">
-                <div class="container mx-auto px-4 text-center">
-                    <h3 class="text-xl md:text-2xl font-semibold mb-6 sm:mb-8" data-i18n-key="platforms.title">AVM 支持主流平台数据</h3>
-                    <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-12">
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-                            <i class="fab fa-twitter platform-icon text-3xl sm:text-4xl"></i>
-                        </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                            <i class="fab fa-youtube platform-icon text-3xl sm:text-4xl"></i>
-                        </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                            <i class="fab fa-tiktok platform-icon text-3xl sm:text-4xl"></i>
-                        </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                            <i class="fab fa-instagram platform-icon text-3xl sm:text-4xl"></i>
-                        </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                             <i class="fab fa-facebook platform-icon text-3xl sm:text-4xl"></i>
-                        </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitch">
-                             <i class="fab fa-twitch platform-icon text-3xl sm:text-4xl"></i>
-                        </a>
-                        <span class="text-gray-400 text-base sm:text-lg" data-i18n-key="platforms.more">等...</span>
+            <section id="community" class="py-20 md:py-28 bg-[#101424]">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-2">加入社区中心</h2>
+                    <p class="text-center text-gray-400 mb-12">连接、讨论并与你喜爱的KOL共同成长。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="community-posts-container"></div>
+                     <div class="text-center mt-12">
+                         <a href="#" id="join-community-btn" class="btn-primary text-white font-bold py-3 px-8 rounded-lg">进入社区发现更多</a>
                     </div>
                 </div>
             </section>
-
-            <section id="realtime-avm" class="py-12 md:py-16 bg-gray-800">
-                <div class="container mx-auto px-4">
-                    <div class="flex flex-col sm:flex-row justify-between items-center mb-8 sm:mb-10">
-                         <h2 class="text-2xl md:text-3xl font-semibold mb-4 sm:mb-0" data-i18n-key="realtime_avm.title">
-                            <i class="fas fa-wave-square text-yellow-400 mr-2"></i>实时影响力价值追踪
-                         </h2>
-                        <a href="/avm-ranking" class="text-yellow-500 hover:text-yellow-400 font-semibold text-sm sm:text-base" data-i18n-key="realtime_avm.view_ranking">
-                            查看完整 AVM 排行榜 <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="realtime-avm-container">
-                        <div class="realtime-avm-card">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="font-semibold text-base sm:text-lg">KOL Gamma</span>
-                                <span class="text-xs px-2 py-0.5 bg-green-600/20 text-green-400 rounded-full">实时更新</span>
-                            </div>
-                            <div class="flex items-baseline justify-between">
-                                <span class="text-xl sm:text-2xl font-bold text-white">925</span>
-                                <span class="text-base sm:text-lg font-semibold text-buy flex items-center">
-                                    <i class="fas fa-arrow-up mr-1 text-sm"></i> +3.5%
-                                    <span class="text-xs text-gray-400 ml-1 sm:ml-2">(24h)</span>
-                                </span>
-                            </div>
-                        </div>
-                         <div class="realtime-avm-card">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="font-semibold text-base sm:text-lg">KOL Sigma</span>
-                                <span class="text-xs px-2 py-0.5 bg-green-600/20 text-green-400 rounded-full">实时更新</span>
-                            </div>
-                            <div class="flex items-baseline justify-between">
-                                <span class="text-xl sm:text-2xl font-bold text-white">780</span>
-                                <span class="text-base sm:text-lg font-semibold text-sell flex items-center">
-                                    <i class="fas fa-arrow-down mr-1 text-sm"></i> -1.2%
-                                    <span class="text-xs text-gray-400 ml-1 sm:ml-2">(24h)</span>
-                                </span>
-                            </div>
-                        </div>
-                         <div class="realtime-avm-card">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="font-semibold text-base sm:text-lg">KOL Omega</span>
-                                <span class="text-xs px-2 py-0.5 bg-green-600/20 text-green-400 rounded-full">实时更新</span>
-                            </div>
-                            <div class="flex items-baseline justify-between">
-                                <span class="text-xl sm:text-2xl font-bold text-white">810</span>
-                                <span class="text-base sm:text-lg font-semibold text-gray-400 flex items-center">
-                                    <i class="fas fa-minus mr-1 text-sm"></i> 0.0%
-                                    <span class="text-xs text-gray-400 ml-1 sm:ml-2">(24h)</span>
-                                </span>
-                            </div>
-                        </div>
-                         <div class="realtime-avm-card">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="font-semibold text-base sm:text-lg">KOL Zeta (新)</span>
-                                <span class="text-xs px-2 py-0.5 bg-blue-600/20 text-blue-400 rounded-full">首次评估</span>
-                            </div>
-                            <div class="flex items-baseline justify-between">
-                                <span class="text-xl sm:text-2xl font-bold text-white">650</span>
-                                <span class="text-base sm:text-lg font-semibold text-gray-400 flex items-center">
-                                    --
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-center text-xs text-gray-500 mt-6" data-i18n-key="realtime_avm.disclaimer">
-                        * AVM 估值根据多维度数据实时计算，仅供参考，不构成投资建议。数据更新可能存在延迟。
-                    </p>
+        
+            <section id="kol-list" class="py-20 md:py-28">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">明星KOL抢先看</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
                 </div>
             </section>
-
-            <section id="featured-kols" class="py-12 md:py-16 bg-gray-900">
-                <div class="container mx-auto px-4 text-center">
-                    <h2 class="text-2xl md:text-3xl font-semibold mb-10 sm:mb-12" data-i18n-key="featured_kols.title">明星 KOL 已入驻</h2>
-                    <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-12">
-                        <div class="text-center">
-                            <a href="/kol/star-a" title="明星KOL A">
-                                <img src="https://placehold.co/64x64/cccccc/777777?text=StarA" alt="[图片：明星KOL A 头像]" class="featured-kol-avatar w-16 h-16 sm:w-20 sm:h-20 mx-auto">
-                                <p class="mt-2 text-xs sm:text-sm font-medium">明星KOL A</p>
-                            </a>
-                        </div>
-                         <div class="text-center">
-                             <a href="/kol/star-b" title="明星KOL B">
-                                <img src="https://placehold.co/64x64/cccccc/777777?text=StarB" alt="[图片：明星KOL B 头像]" class="featured-kol-avatar w-16 h-16 sm:w-20 sm:h-20 mx-auto">
-                                <p class="mt-2 text-xs sm:text-sm font-medium">明星KOL B</p>
-                            </a>
-                        </div>
-                         <div class="text-center">
-                             <a href="/kol/star-c" title="明星KOL C">
-                                <img src="https://placehold.co/64x64/cccccc/777777?text=StarC" alt="[图片：明星KOL C 头像]" class="featured-kol-avatar w-16 h-16 sm:w-20 sm:h-20 mx-auto">
-                                <p class="mt-2 text-xs sm:text-sm font-medium">明星KOL C</p>
-                            </a>
-                        </div>
-                         <div class="text-center">
-                             <a href="/kol/star-d" title="明星KOL D">
-                                <img src="https://placehold.co/64x64/cccccc/777777?text=StarD" alt="[图片：明星KOL D 头像]" class="featured-kol-avatar w-16 h-16 sm:w-20 sm:h-20 mx-auto">
-                                <p class="mt-2 text-xs sm:text-sm font-medium">明星KOL D</p>
-                             </a>
-                        </div>
-                         <div class="text-center">
-                            <a href="/kol/star-e" title="明星KOL E">
-                                <img src="https://placehold.co/64x64/cccccc/777777?text=StarE" alt="[图片：明星KOL E 头像]" class="featured-kol-avatar w-16 h-16 sm:w-20 sm:h-20 mx-auto">
-                                <p class="mt-2 text-xs sm:text-sm font-medium">明星KOL E</p>
-                            </a>
-                        </div>
-                    </div>
-                     <div class="mt-10 sm:mt-12">
-                         <a href="/discover?featured=true" class="text-yellow-500 hover:text-yellow-400 font-semibold text-sm sm:text-base" data-i18n-key="featured_kols.view_more">
-                            查看更多入驻KOL <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                     </div>
-                </div>
-            </section>
-
-             <section id="kol-discovery" class="py-12 md:py-16 bg-gray-800">
-                 <div class="container mx-auto px-4">
-                    <div class="flex flex-col sm:flex-row justify-between items-center mb-8 sm:mb-10">
-                        <h2 class="text-2xl md:text-3xl font-semibold mb-4 sm:mb-0" data-i18n-key="discover.title">发现潜力KOL</h2>
-                        <a href="/discover" class="text-yellow-500 hover:text-yellow-400 font-semibold text-sm sm:text-base" data-i18n-key="discover.view_all">
-                            查看全部 <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                        <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg">
-                            <img src="https://placehold.co/400x250/2a2f3b/cccccc?text=KOL+A+Banner" alt="[图片：KOL A 横幅]" class="w-full h-32 object-cover">
-                            <div class="p-3 sm:p-4">
-                                <div class="flex items-center mb-2">
-                                    <img src="https://placehold.co/32x32/cccccc/777777?text=A" alt="[图片：KOL A 头像]" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3 border-2 border-gray-700">
-                                    <div>
-                                        <h3 class="font-semibold text-sm sm:text-base">KOL Alpha</h3>
-                                        <p class="text-xs text-gray-400">游戏 / 电竞</p>
-                                    </div>
-                                </div>
-                                <p class="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-3 line-clamp-2 sm:line-clamp-3">专注于策略游戏深度解析，拥有百万忠实粉丝...</p>
-                                <div class="text-xs text-gray-500 mb-2" data-i18n-key="discover.assets">关联资产: <span class="text-blue-400">代币</span>, <span class="text-purple-400">NFT</span></div>
-                                <div class="flex justify-between items-center text-xs">
-                                    <span class="text-gray-400">AVM: <span class="text-yellow-500 font-semibold">850</span></span>
-                                    <a href="/kol/alpha" class="text-blue-500 hover:text-blue-400">详情</a>
-                                </div>
-                            </div>
-                        </div>
-                         <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg">
-                            <img src="https://placehold.co/400x250/2a2f3b/cccccc?text=KOL+B+Banner" alt="[图片：KOL B 横幅]" class="w-full h-32 object-cover">
-                            <div class="p-3 sm:p-4">
-                                <div class="flex items-center mb-2">
-                                    <img src="https://placehold.co/32x32/cccccc/777777?text=B" alt="[图片：KOL B 头像]" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3 border-2 border-gray-700">
-                                    <div>
-                                        <h3 class="font-semibold text-sm sm:text-base">KOL Beta</h3>
-                                        <p class="text-xs text-gray-400">美妆 / 时尚</p>
-                                    </div>
-                                </div>
-                                <p class="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-3 line-clamp-2 sm:line-clamp-3">分享最新潮流趋势与实用美妆技巧，引领时尚风向...</p>
-                                <div class="text-xs text-gray-500 mb-2" data-i18n-key="discover.assets">关联资产: <span class="text-purple-400">NFT</span></div>
-                                <div class="flex justify-between items-center text-xs">
-                                    <span class="text-gray-400">AVM: <span class="text-yellow-500 font-semibold">910</span></span>
-                                    <a href="/kol/beta" class="text-blue-500 hover:text-blue-400">详情</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg">
-                            <img src="https://placehold.co/400x250/2a2f3b/cccccc?text=KOL+C+Banner" alt="[图片：KOL C 横幅]" class="w-full h-32 object-cover">
-                            <div class="p-3 sm:p-4">
-                                <div class="flex items-center mb-2">
-                                    <img src="https://placehold.co/32x32/cccccc/777777?text=C" alt="[图片：KOL C 头像]" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3 border-2 border-gray-700">
-                                    <div>
-                                        <h3 class="font-semibold text-sm sm:text-base">KOL Charlie</h3>
-                                        <p class="text-xs text-gray-400">财经 / 投资</p>
-                                    </div>
-                                </div>
-                                <p class="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-3 line-clamp-2 sm:line-clamp-3">深入浅出解读宏观经济，分享实用投资理财策略...</p>
-                                <div class="text-xs text-gray-500 mb-2" data-i18n-key="discover.assets">关联资产: <span class="text-blue-400">代币</span></div>
-                                <div class="flex justify-between items-center text-xs">
-                                    <span class="text-gray-400">AVM: <span class="text-yellow-500 font-semibold">880</span></span>
-                                    <a href="/kol/charlie" class="text-blue-500 hover:text-blue-400">详情</a>
-                                </div>
-                            </div>
-                        </div>
-                         <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg">
-                            <img src="https://placehold.co/400x250/2a2f3b/cccccc?text=KOL+D+Banner" alt="[图片：KOL D 横幅]" class="w-full h-32 object-cover">
-                            <div class="p-3 sm:p-4">
-                                <div class="flex items-center mb-2">
-                                    <img src="https://placehold.co/32x32/cccccc/777777?text=D" alt="[图片：KOL D 头像]" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3 border-2 border-gray-700">
-                                    <div>
-                                        <h3 class="font-semibold text-sm sm:text-base">KOL Delta</h3>
-                                        <p class="text-xs text-gray-400">科技 / 数码</p>
-                                    </div>
-                                </div>
-                                <p class="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-3 line-clamp-2 sm:line-clamp-3">第一时间评测最新科技产品，探索前沿技术趋势...</p>
-                                <div class="text-xs text-gray-500 mb-2" data-i18n-key="discover.assets">关联资产: <span class="text-blue-400">代币</span>, <span class="text-purple-400">NFT</span></div>
-                                <div class="flex justify-between items-center text-xs">
-                                    <span class="text-gray-400">AVM: <span class="text-yellow-500 font-semibold">820</span></span>
-                                    <a href="/kol/delta" class="text-blue-500 hover:text-blue-400">详情</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="community-hub" class="py-12 md:py-16 bg-gray-900">
-                <div class="container mx-auto px-4">
-                     <div class="flex flex-col sm:flex-row justify-between items-center mb-8 sm:mb-10">
-                         <h2 class="text-2xl md:text-3xl font-semibold mb-4 sm:mb-0" data-i18n-key="community.title">
-                            <i class="fas fa-comments text-yellow-400 mr-2"></i>热门社区动态
-                         </h2>
-                         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-                             <a href="https://discord.gg/kolmarket" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-semibold flex items-center justify-center space-x-2 transition duration-300">
-                                <i class="fab fa-discord"></i>
-                                <span data-i18n-key="community.join_discord">加入 Discord</span>
-                             </a>
-                             <a href="https://t.me/KolmarketOfficial" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-md text-sm font-semibold flex items-center justify-center space-x-2 transition duration-300">
-                                 <i class="fab fa-telegram-plane"></i>
-                                 <span data-i18n-key="community.join_telegram">加入 Telegram</span>
-                             </a>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                        <div class="community-card">
-                            <div>
-                                <div class="flex items-center mb-3">
-                                    <span class="text-sm font-semibold mr-2" data-i18n-key="community.hot_topic">热门讨论</span>
-                                    <span class="text-xs px-2 py-0.5 bg-red-600/20 text-red-400 rounded-full">进行中</span>
-                                </div>
-                                <a href="#" class="block font-medium text-base sm:text-lg hover:text-yellow-400 mb-2" data-i18n-key="community.topic1_title">KOL Alpha 的新代币经济模型分析</a>
-                                <p class="text-sm text-gray-400 line-clamp-3" data-i18n-key="community.topic1_desc">社区成员正在深入探讨 KOL Alpha 最新公布的代币回购计划及其对未来价值的潜在影响，快来分享你的看法！</p>
-                            </div>
-                            <div class="mt-4 pt-3 border-t border-gray-700 flex justify-between items-center text-xs text-gray-500">
-                                <span><i class="fas fa-comment-alt mr-1"></i> 128 回复</span>
-                                <span><i class="fas fa-user-friends mr-1"></i> 56 参与</span>
-                            </div>
-                        </div>
-                        <div class="community-card">
-                            <div>
-                                <div class="flex items-center mb-3">
-                                    <span class="text-sm font-semibold mr-2" data-i18n-key="community.event_preview">活动预告</span>
-                                    <span class="text-xs px-2 py-0.5 bg-blue-600/20 text-blue-400 rounded-full">即将开始</span>
-                                </div>
-                                <a href="#" class="block font-medium text-base sm:text-lg hover:text-yellow-400 mb-2" data-i18n-key="community.event1_title">AMA: 与 KOL Beta 面对面</a>
-                                <p class="text-sm text-gray-400 line-clamp-3" data-i18n-key="community.event1_desc">本周五晚 8 点，明星 KOL Beta 将作客 Kolmarket Discord 社区，分享她的 NFT 创作心得和未来计划。准备好你的问题！</p>
-                            </div>
-                            <div class="mt-4 pt-3 border-t border-gray-700 flex justify-between items-center text-xs text-gray-500">
-                                <span><i class="fas fa-calendar-alt mr-1"></i> 5月2日 20:00</span>
-                                <span><i class="fas fa-map-marker-alt mr-1"></i> Discord</span>
-                            </div>
-                        </div>
-                        <div class="community-card">
-                            <div>
-                                <div class="flex items-center mb-3">
-                                    <span class="text-sm font-semibold mr-2" data-i18n-key="community.kol_interaction">KOL 互动</span>
-                                    <span class="text-xs px-2 py-0.5 bg-yellow-600/20 text-yellow-400 rounded-full">最新动态</span>
-                                </div>
-                                <a href="#" class="block font-medium text-base sm:text-lg hover:text-yellow-400 mb-2" data-i18n-key="community.kol_update1_title">KOL Charlie 发起了新投票！</a>
-                                <p class="text-sm text-gray-400 line-clamp-3" data-i18n-key="community.kol_update1_desc">持有 KOL Charlie 投票权益卡的粉丝，现在可以参与决定他下一期投资分析视频的主题了。快去行使你的权利吧！</p>
-                            </div>
-                             <div class="mt-4 pt-3 border-t border-gray-700 flex justify-between items-center text-xs text-gray-500">
-                                <span><i class="fas fa-user mr-1"></i> KOL Charlie</span>
-                                <span><i class="fas fa-clock mr-1"></i> 2小时前</span>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="text-center mt-10 sm:mt-12">
-                         <a href="/community" class="text-yellow-500 hover:text-yellow-400 font-semibold text-sm sm:text-base" data-i18n-key="community.view_more">
-                            进入社区发现更多 <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                     </div>
-                </div>
-            </section>
-
-            <section id="what-is-benefit-card" class="py-12 md:py-16 bg-gray-800">
-                <div class="container mx-auto px-4">
-                    <h2 class="text-2xl md:text-3xl font-semibold text-center mb-10 sm:mb-12" data-i18n-key="benefit_card.title">什么是 KOL 权益卡 (NFT)？</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-center">
-                        <div class="px-4">
-                            <div class="benefit-card-icon mx-auto">
-                                <i class="fas fa-box-open text-xl"></i>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2" data-i18n-key="benefit_card.type_goods_title">商品/服务型</h3>
-                            <p class="text-sm sm:text-base text-gray-400" data-i18n-key="benefit_card.type_goods_desc">解锁独家内容、获取限量周边、参与线下活动、获得优先购买权等实际福利。</p>
-                        </div>
-                        <div class="px-4">
-                            <div class="benefit-card-icon mx-auto">
-                                <i class="fas fa-chart-pie text-xl"></i>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2" data-i18n-key="benefit_card.type_investment_title">投资/收益型</h3>
-                            <p class="text-sm sm:text-base text-gray-400" data-i18n-key="benefit_card.type_investment_desc">代表对 KOL 未来收入或特定项目的分成权，或作为可交易的收藏品，共享 KOL 成长价值。</p>
-                        </div>
-                        <div class="px-4">
-                            <div class="benefit-card-icon mx-auto">
-                                <i class="fas fa-users text-xl"></i>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2" data-i18n-key="benefit_card.type_interaction_title">互动/身份型</h3>
-                            <p class="text-sm sm:text-base text-gray-400" data-i18n-key="benefit_card.type_interaction_desc">获得社群特权、参与决策投票、拥有专属粉丝身份标识，深度参与 KOL 生态。</p>
-                        </div>
-                    </div>
-                    <div class="text-center mt-10 sm:mt-12">
-                         <a href="/nft-market-guide" class="text-yellow-500 hover:text-yellow-400 font-semibold text-sm sm:text-base" data-i18n-key="benefit_card.learn_more">
-                            探索更多 NFT 权益卡 <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                     </div>
-                </div>
-            </section>
-
-             <section id="app-download" class="py-12 md:py-16 bg-gray-900">
-                 <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
-                    <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-                        <h2 class="text-2xl md:text-3xl font-semibold mb-4" data-i18n-key="app.title">随时随地交易</h2>
-                        <p class="text-base md:text-lg text-gray-400 mb-6" data-i18n-key="app.description">下载 Kolmarket 移动应用，实时追踪市场动态，管理您的影响力资产。</p>
-                        <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-3 sm:space-y-0 sm:space-x-4">
-                            <a href="#" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 text-white px-5 py-2.5 rounded-lg flex items-center justify-center space-x-2 transition duration-300">
-                                <i class="fab fa-apple text-xl"></i>
-                                <span class="text-sm" data-i18n-key="app.ios">App Store</span>
-                            </a>
-                            <a href="#" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 text-white px-5 py-2.5 rounded-lg flex items-center justify-center space-x-2 transition duration-300">
-                                <i class="fab fa-google-play text-xl"></i>
-                                <span class="text-sm" data-i18n-key="app.google">Google Play</span>
-                            </a>
-                             <a href="#" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 text-white px-5 py-2.5 rounded-lg flex items-center justify-center space-x-2 transition duration-300">
-                                <i class="fab fa-android text-xl"></i>
-                                <span class="text-sm" data-i18n-key="app.android">Android APK</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="md:w-1/3 flex justify-center space-x-4 sm:space-x-6 mt-8 md:mt-0">
-                        <div class="text-center">
-                             <img src="https://placehold.co/120x120/374151/cccccc?text=iOS+QR" alt="[图片：iOS App 下载二维码]" class="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-2 rounded-lg">
-                             <p class="text-xs sm:text-sm text-gray-400" data-i18n-key="app.scan_ios">扫描下载 iOS App</p>
-                        </div>
-                         <div class="text-center">
-                             <img src="https://placehold.co/120x120/374151/cccccc?text=Android+QR" alt="[图片：Android App 下载二维码]" class="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-2 rounded-lg">
-                             <p class="text-xs sm:text-sm text-gray-400" data-i18n-key="app.scan_android">扫描下载 Android App</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="platform-features" class="py-12 md:py-16 bg-gray-800">
-                 <div class="container mx-auto px-4">
-                    <h2 class="text-2xl md:text-3xl font-semibold text-center mb-10 sm:mb-12" data-i18n-key="why.title">为什么选择 Kolmarket？</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                        <div class="text-center px-4">
-                             <div class="text-3xl sm:text-4xl text-yellow-500 mb-3 sm:mb-4"><i class="fas fa-brain"></i></div>
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2" data-i18n-key="why.feature1_title">精准 AVM 估值</h3>
-                            <p class="text-sm sm:text-base text-gray-400" data-i18n-key="why.feature1_desc">独家 <span class="font-semibold">AVM 系统</span> 基于海量数据与AI算法，提供科学、动态的影响力价值评估。</p>
-                        </div>
-                        <div class="text-center px-4">
-                            <div class="text-3xl sm:text-4xl text-yellow-500 mb-3 sm:mb-4"><i class="fas fa-exchange-alt"></i></div>
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2" data-i18n-key="why.feature2_title_v2">交易KOL代币与NFT</h3>
-                            <p class="text-sm sm:text-base text-gray-400" data-i18n-key="why.feature2_desc_v2">投资或交易独特的KOL个人代币和NFT权益卡，捕捉创作者经济增长红利。</p>
-                         </div>
-                        <div class="text-center px-4">
-                            <div class="text-3xl sm:text-4xl text-yellow-500 mb-3 sm:mb-4"><i class="fas fa-shield-alt"></i></div>
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2" data-i18n-key="why.feature3_title">安全可靠平台</h3>
-                            <p class="text-sm sm:text-base text-gray-400" data-i18n-key="why.feature3_desc">银行级安全防护，高性能撮合引擎，保障您的资产安全和流畅交易体验。</p>
-                         </div>
-                    </div>
-                </div>
-            </section>
-
         </main>
-
-        <footer class="bg-gray-900 border-t border-gray-700 py-8 mt-auto">
-            <div class="container mx-auto px-4 text-gray-400 text-xs sm:text-sm">
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-8 mb-8">
+        
+        <footer class="bg-[#101424] pt-16 pb-8">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8 text-sm">
+                    <div class="col-span-2 md:col-span-1">
+                        <h3 class="text-xl font-bold mb-4 brand-gradient-text">Kolmarket</h3>
+                        <p class="text-gray-400">全球首个KOL影响力资产交易所，致力于重塑创作者经济。</p>
+                        <div class="flex space-x-4 mt-6">
+                            <a href="#" class="text-gray-400 hover:text-white" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white" aria-label="Discord"><i class="fab fa-discord text-xl"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white" aria-label="Telegram"><i class="fab fa-telegram text-xl"></i></a>
+                        </div>
+                    </div>
                     <div>
-                        <h4 class="font-semibold text-white mb-3" data-i18n-key="footer.about">关于我们</h4>
-                        <ul class="space-y-1">
-                            <li><a href="/about" class="hover:text-white" data-i18n-key="footer.about_kolmarket">Kolmarket简介</a></li>
-                            <li><a href="/careers" class="hover:text-white" data-i18n-key="footer.careers">加入我们</a></li>
-                            <li><a href="/press" class="hover:text-white" data-i18n-key="footer.press">媒体报道</a></li>
-                        </ul>
-                    </div>
-                     <div>
-                        <h4 class="font-semibold text-white mb-3" data-i18n-key="footer.products">产品</h4>
-                        <ul class="space-y-1">
-                            <li><a href="/trade?type=token" class="hover:text-white" data-i18n-key="footer.token_trading">KOL 代币交易</a></li>
-                            <li><a href="/trade?type=nft" class="hover:text-white" data-i18n-key="footer.nft_trading">NFT 权益交易</a></li>
-                            <li><a href="/launchpad" class="hover:text-white" data-i18n-key="footer.launchpad">资产发行</a></li>
-                            <li><a href="/indices" class="hover:text-white" data-i18n-key="footer.indices">影响力指数</a></li>
-                            <li><a href="/api" class="hover:text-white" data-i18n-key="footer.api">API</a></li>
-                            <li><a href="#avm-section" class="hover:text-white" data-i18n-key="footer.avm">AVM估值系统</a></li>
-                            <li><a href="#discover-valuation" class="hover:text-white" data-i18n-key="footer.valuation_query">估值查询</a></li>
-                            <li><a href="#realtime-avm" class="hover:text-white" data-i18n-key="footer.realtime_avm">实时追踪</a></li>
-                        </ul>
-                    </div>
-                     <div>
-                        <h4 class="font-semibold text-white mb-3" data-i18n-key="footer.services">服务</h4>
-                        <ul class="space-y-1">
-                            <li><a href="/apply" class="hover:text-white" data-i18n-key="footer.apply_listing">上币申请</a></li>
-                            <li><a href="/support" class="hover:text-white" data-i18n-key="footer.support">帮助中心</a></li>
-                            <li><a href="/fees" class="hover:text-white" data-i18n-key="footer.fees">费率说明</a></li>
-                            <li><a href="/issue-guide" class="hover:text-white" data-i18n-key="footer.issue_guide">资产发行指南</a></li>
-                            <li><a href="/nft-market-guide" class="hover:text-white" data-i18n-key="footer.nft_guide">NFT权益卡指南</a></li>
+                        <h4 class="font-bold text-white mb-4">产品</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#market" class="text-gray-400 hover:text-white">行情中心</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">NFT市场</a></li>
+                            <li><a href="#community" class="text-gray-400 hover:text-white">社区</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">API文档</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h4 class="font-semibold text-white mb-3" data-i18n-key="footer.legal">法律</h4>
-                        <ul class="space-y-1">
-                            <li><a href="/terms" class="hover:text-white" data-i18n-key="footer.terms">服务条款</a></li>
-                            <li><a href="/privacy" class="hover:text-white" data-i18n-key="footer.privacy">隐私政策</a></li>
-                            <li><a href="/risk" class="hover:text-white" data-i18n-key="footer.risk">风险提示</a></li>
+                         <h4 class="font-bold text-white mb-4">服务支持</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white">帮助中心</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">联系我们</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">费率说明</a></li>
                         </ul>
                     </div>
-                     <div class="col-span-2 sm:col-span-3 md:col-span-2 lg:col-span-2">
-                         <h4 class="font-semibold text-white mb-3" data-i18n-key="footer.follow_us">关注我们</h4>
-                         <div class="flex space-x-4 mb-4">
-                             <a href="#" class="text-gray-400 hover:text-white text-lg sm:text-xl" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                             <a href="#" class="text-gray-400 hover:text-white text-lg sm:text-xl" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
-                             <a href="#" class="text-gray-400 hover:text-white text-lg sm:text-xl" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                             <a href="#" class="text-gray-400 hover:text-white text-lg sm:text-xl" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                             <a href="#" class="text-gray-400 hover:text-white text-lg sm:text-xl" aria-label="Medium"><i class="fab fa-medium-m"></i></a>
-                         </div>
-                         <h4 class="font-semibold text-white mt-4 mb-3" data-i18n-key="footer.community">社区</h4>
-                          <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-1 sm:space-y-0">
-                             <a href="#" class="text-gray-400 hover:text-white flex items-center"><i class="fas fa-comments mr-1"></i> <span data-i18n-key="footer.community_zh">中文社区</span></a>
-                             <a href="#" class="text-gray-400 hover:text-white flex items-center"><i class="fas fa-globe-americas mr-1"></i> <span data-i18n-key="footer.community_global">Global Community</span></a>
-                             <a href="#community-hub" class="text-gray-400 hover:text-white flex items-center"><i class="fas fa-hashtag mr-1"></i> <span data-i18n-key="footer.community_hub">社区动态</span></a>
-                          </div>
+                    <div>
+                         <h4 class="font-bold text-white mb-4">创作者</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" id="footer-apply-btn" class="text-gray-400 hover:text-white">KOL入驻</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">资产发行指南</a></li>
+                            <li><a href="#avm-details" class="text-gray-400 hover:text-white">AVM估值模型</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                         <h4 class="font-bold text-white mb-4">法律</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white">服务条款</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">隐私政策</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">风险提示</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="border-t border-gray-700 pt-6 text-center text-xs" data-i18n-key="footer.copyright">
-                    © 2025 Kolmarket. All rights reserved.
+                <div class="border-t border-gray-800 pt-8 text-center text-xs text-gray-500">
+                    <p>© 2025 Kolmarket. All Rights Reserved.</p>
                 </div>
             </div>
         </footer>
+    </div>
 
+    <div id="kol-apply-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white">KOL 入驻申请</h2>
+                <button id="close-apply-modal" class="text-2xl text-gray-500 hover:text-white">×</button>
+            </div>
+            <form id="kol-apply-form">
+                <div class="space-y-4">
+                    <div>
+                        <label for="kol-name" class="block text-sm font-medium text-gray-300 mb-1">名称 / 艺名</label>
+                        <input type="text" id="kol-name" name="kol-name" required class="w-full bg-gray-800 border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                    </div>
+                    <div>
+                        <label for="kol-email" class="block text-sm font-medium text-gray-300 mb-1">联系邮箱</label>
+                        <input type="email" id="kol-email" name="kol-email" required class="w-full bg-gray-800 border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                    </div>
+                     <div>
+                        <label for="kol-category" class="block text-sm font-medium text-gray-300 mb-1">主要领域</label>
+                        <select id="kol-category" name="kol-category" class="w-full bg-gray-800 border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                            <option>游戏</option>
+                            <option>时尚美妆</option>
+                            <option>科技数码</option>
+                            <option>财经投资</option>
+                            <option>旅行生活</option>
+                            <option>其他</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="kol-social" class="block text-sm font-medium text-gray-300 mb-1">主要社交媒体链接 (例如 YouTube)</label>
+                        <input type="url" id="kol-social" name="kol-social" required placeholder="https://youtube.com/..." class="w-full bg-gray-800 border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                    </div>
+                     <div>
+                        <label for="kol-followers" class="block text-sm font-medium text-gray-300 mb-1">总粉丝数估算</label>
+                        <input type="text" id="kol-followers" name="kol-followers" placeholder="例如: 1.5M 或 150万" required class="w-full bg-gray-800 border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                    </div>
+                    <div>
+                        <label for="kol-intro" class="block text-sm font-medium text-gray-300 mb-1">简单介绍一下自己</label>
+                        <textarea id="kol-intro" name="kol-intro" rows="3" class="w-full bg-gray-800 border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-cyan-500"></textarea>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <button type="submit" class="w-full btn-primary text-white font-bold py-3 px-8 rounded-lg">提交申请</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="community-modal" class="modal-overlay">
+        <div class="modal-content text-center relative">
+             <button id="close-community-modal" class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-white">×</button>
+             <i class="fas fa-users text-4xl brand-gradient-text mb-4"></i>
+             <h2 class="text-2xl font-bold text-white mb-4">加入我们的社区</h2>
+             <p class="text-gray-400 mb-6">与其他投资者和创作者交流，获取最新资讯、参与独家活动，共同塑造Kolmarket的未来。</p>
+             <div class="space-y-4">
+                 <a href="#" target="_blank" class="w-full flex items-center justify-center space-x-3 bg-[#5865F2] hover:bg-[#4f5bda] text-white font-semibold py-3 px-6 rounded-lg transition">
+                     <i class="fab fa-discord text-xl"></i>
+                     <span>加入 Discord</span>
+                 </a>
+                 <a href="#" target="_blank" class="w-full flex items-center justify-center space-x-3 bg-[#0088cc] hover:bg-[#007ab8] text-white font-semibold py-3 px-6 rounded-lg transition">
+                     <i class="fab fa-telegram text-xl"></i>
+                     <span>加入 Telegram</span>
+                 </a>
+             </div>
+        </div>
     </div>
 
     <script>
-        // Theme switching logic (unchanged)
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        const currentTheme = localStorage.getItem('theme');
-        function setTheme(theme) { if (theme === 'light') { body.classList.add('light-theme'); themeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon'); } else { body.classList.remove('light-theme'); themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun'); } }
-        setTheme(currentTheme);
-        themeToggle.addEventListener('click', () => { let newTheme = 'dark'; if (body.classList.contains('light-theme')) { body.classList.remove('light-theme'); themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun'); } else { body.classList.add('light-theme'); themeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon'); newTheme = 'light'; } localStorage.setItem('theme', newTheme); });
+    document.addEventListener('DOMContentLoaded', function () {
+        // --- Mock Data ---
+        const kolTokenData = [
+            { id: 1, name: 'Alex Starlight', symbol: 'AST', avatar: 'https://placehold.co/40x40/7B61FF/FFFFFF?text=A', price: 12.345, change: 5.12, avm: 8950, market_cap: 12345678, holders: 15234 },
+            { id: 2, name: 'Bella Quantum', symbol: 'BQT', avatar: 'https://placehold.co/40x40/FF4081/FFFFFF?text=B', price: 0.8912, change: -2.45, avm: 9210, market_cap: 8912000, holders: 28765 },
+            { id: 3, name: 'CryptoCody', symbol: 'CODY', avatar: 'https://placehold.co/40x40/00BCD4/FFFFFF?text=C', price: 105.78, change: 15.80, avm: 9500, market_cap: 105780000, holders: 8456 },
+            { id: 4, name: 'Diana Moves', symbol: 'DMV', avatar: 'https://placehold.co/40x40/FBC02D/FFFFFF?text=D', price: 3.456, change: 0.5, avm: 8500, market_cap: 3456000, holders: 45012 },
+        ];
+        const nftData = [
+            { name: 'Alex的专属内容卡', kol: 'Alex Starlight', image: 'https://placehold.co/400x400/7B61FF/FFFFFF?text=Content', price: '50 USDT', type: '内容访问' },
+            { name: 'Bella的VIP见面会', kol: 'Bella Quantum', image: 'https://placehold.co/400x400/FF4081/FFFFFF?text=Event', price: '1.2 ETH', type: '线下活动' },
+            { name: 'Cody的决策投票权', kol: 'CryptoCody', image: 'https://placehold.co/400x400/00BCD4/FFFFFF?text=Vote', price: '100 CODY', type: '社区治理' },
+            { name: 'Diana的限量周边', kol: 'Diana Moves', image: 'https://placehold.co/400x400/FBC02D/FFFFFF?text=Merch', price: '99 USDT', type: '优先购买' },
+        ];
+        const indexData = [
+            { name: '游戏KOL指数', symbol: 'GAME', value: 1250.5, change: -1.5, icon: 'fa-gamepad', params: { growth: 75, interaction: 60, commercial: 85 } },
+            { name: '美妆KOL指数', symbol: 'BEAUTY', value: 980.2, change: 2.8, icon: 'fa-gem', params: { growth: 65, interaction: 80, commercial: 90 } },
+            { name: '科技KOL指数', symbol: 'TECH', value: 2100.0, change: 0.5, icon: 'fa-robot', params: { growth: 80, interaction: 70, commercial: 75 } },
+        ];
+        const featuredKols = [
+            { name: 'Alex Gamer', handle: '@alexgamer', fans: '10.5M', avm: 8950, change: 25, avatar: 'https://placehold.co/80x80/FFFFFF/7B61FF?text=A', cover: 'https://placehold.co/400x250/7B61FF/FFFFFF?text=Gaming+KOL' },
+            { name: 'Bella Style', handle: '@bellastyle', fans: '25.1M', avm: 9800, change: 18, avatar: 'https://placehold.co/80x80/FFFFFF/FF4081?text=B', cover: 'https://placehold.co/400x250/FF4081/FFFFFF?text=Fashion+KOL' },
+            { name: 'Cody Tech', handle: '@codytech', fans: '5.2M', avm: 9200, change: -3, avatar: 'https://placehold.co/80x80/FFFFFF/00BCD4?text=C', cover: 'https://placehold.co/400x250/00BCD4/FFFFFF?text=Tech+KOL' },
+            { name: 'Diana Moves', handle: '@dianamoves', fans: '8.9M', avm: 8500, change: 12, avatar: 'https://placehold.co/80x80/FFFFFF/FBC02D?text=D', cover: 'https://placehold.co/400x250/FBC02D/FFFFFF?text=Travel+KOL' },
+        ];
+        const communityPosts = [
+            { type: 'discussion', title: 'KOL Alpha 的新代币经济模型深度分析', description: '社区成员正在深入探讨KOL Alpha最新公布的代币回购计划及其对未来价值的潜在影响...', replies: 128, participants: 56, tag: '热门讨论', tagColor: 'bg-red-500/20 text-red-400' },
+            { type: 'event', title: 'AMA: 与明星KOL Bella面对面', description: '本周五晚8点，明星KOL Bella将作客官方Discord社区，分享她的NFT创作心得和未来计划。', time: '周五 20:00', platform: 'Discord', tag: '活动预告', tagColor: 'bg-blue-500/20 text-blue-400' },
+            { type: 'update', title: 'CodyTech发起了新投票！', description: '持有CodyTech投票权益卡的粉丝，现在可以参与决定他下一期评测视频的主题了。快去行使你的权利吧！', kol: 'CryptoCody', timeAgo: '2小时前', tag: 'KOL动态', tagColor: 'bg-yellow-500/20 text-yellow-400' },
+        ];
 
-        // Smooth scroll (unchanged)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { e.preventDefault(); const targetId = this.getAttribute('href'); const targetElement = document.querySelector(targetId); if(targetElement) { targetElement.scrollIntoView({ behavior: 'smooth' }); } }); });
+        // --- Render Functions ---
+        function renderKolTokens(sortBy = 'market_cap') {
+            const container = document.querySelector('#kol-token-market tbody');
+            if (!container) return;
+            const sortedData = [...kolTokenData].sort((a, b) => {
+                switch(sortBy) {
+                    case 'avm': return b.avm - a.avm;
+                    case 'change': return b.change - a.change;
+                    case 'holders': return b.holders - a.holders;
+                    case 'market_cap': default: return b.market_cap - a.market_cap;
+                }
+            });
+            container.innerHTML = sortedData.map(item => `
+                <tr class="border-t border-gray-800 table-row transition">
+                    <td class="p-4 flex items-center space-x-3"><img src="${item.avatar}" class="rounded-full w-10 h-10" alt="${item.name} Avatar"><div><p class="font-bold">${item.name}</p><p class="text-gray-400 text-xs">${item.symbol}</p></div></td>
+                    <td class="p-4 text-right font-mono">${item.price.toLocaleString()}</td>
+                    <td class="p-4 text-right font-mono hidden sm:table-cell">$${item.market_cap.toLocaleString()}</td>
+                    <td class="p-4 text-right font-mono hidden lg:table-cell">${item.holders.toLocaleString()}</td>
+                    <td class="p-4 text-right hidden md:table-cell"><div class="flex items-center justify-end ${item.change >= 0 ? 'text-green-400' : 'text-red-400'}"><span>${item.avm.toLocaleString()}</span><i class="fas ${item.change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down'} h-3 w-3 ml-1"></i></div></td>
+                    <td class="p-4 text-right font-semibold ${item.change >= 0 ? 'text-green-400' : 'text-red-400'}">${item.change > 0 ? '+' : ''}${item.change}%</td>
+                    <td class="p-4 text-right"><a href="#" class="btn-primary text-xs px-3 py-1 rounded-md text-white">交易</a></td>
+                </tr>
+            `).join('');
+        }
+        function renderNfts() {
+            const container = document.querySelector('#nft-market');
+            if (!container) return;
+            container.innerHTML = nftData.map(item => `<div class="card rounded-xl overflow-hidden group transition hover:-translate-y-1"><img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover"><div class="p-4"><p class="text-xs text-cyan-400 mb-1">${item.kol}</p><h3 class="font-bold text-white mb-2 truncate">${item.name}</h3><div class="flex justify-between items-center text-sm"><span class="font-semibold brand-gradient-text">${item.price}</span><span class="text-gray-400 bg-gray-700 px-2 py-0.5 rounded">${item.type}</span></div></div></div>`).join('');
+        }
+        function renderIndexes() {
+            const container = document.querySelector('#index-market');
+            if (!container) return;
+            container.innerHTML = indexData.map(item => `
+                <div class="card p-6 rounded-xl">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center"><div class="brand-gradient-bg h-10 w-10 rounded-lg flex items-center justify-center mr-4"><i class="fas ${item.icon} text-white"></i></div><div><p class="font-semibold text-white">${item.name}</p><p class="text-xs text-gray-400">${item.symbol}</p></div></div>
+                        <div class="text-right"><p class="text-2xl font-bold font-mono">${item.value.toLocaleString()}</p><p class="font-semibold ${item.change >= 0 ? 'text-green-400' : 'text-red-400'}">${item.change > 0 ? '+' : ''}${item.change}%</p></div>
+                    </div>
+                    <div class="space-y-2 text-xs"><div class="flex items-center justify-between"><span class="text-gray-400">粉丝增长</span><div class="w-1/2 progress-bar-bg rounded-full h-1.5"><div class="progress-bar h-1.5 rounded-full" style="width: ${item.params.growth}%"></div></div></div><div class="flex items-center justify-between"><span class="text-gray-400">内容互动</span><div class="w-1/2 progress-bar-bg rounded-full h-1.5"><div class="progress-bar h-1.5 rounded-full" style="width: ${item.params.interaction}%"></div></div></div><div class="flex items-center justify-between"><span class="text-gray-400">商业价值</span><div class="w-1/2 progress-bar-bg rounded-full h-1.5"><div class="progress-bar h-1.5 rounded-full" style="width: ${item.params.commercial}%"></div></div></div></div>
+                </div>`).join('');
+        }
+        function renderFeaturedKols() {
+            const container = document.querySelector('#kol-list .grid');
+            if (!container) return;
+            container.innerHTML = featuredKols.map(kol => `
+                 <div class="card rounded-xl overflow-hidden group">
+                    <div class="relative"><img src="${kol.cover}" alt="${kol.name} Cover" class="w-full h-40 object-cover"><div class="absolute inset-0 bg-black bg-opacity-20"></div><img src="${kol.avatar}" alt="${kol.name} Avatar" class="rounded-full w-20 h-20 absolute -bottom-10 left-1/2 -translate-x-1/2 border-4 border-[#101424]"></div>
+                    <div class="pt-16 pb-6 px-6 text-center"><h3 class="text-xl font-bold text-white">${kol.name}</h3><p class="text-sm text-cyan-400">${kol.handle}</p><div class="mt-4 flex justify-around text-sm"><div><p class="font-bold">${kol.fans}</p><p class="text-gray-400">粉丝</p></div><div><p class="font-bold">${kol.avm.toLocaleString()}</p><p class="text-gray-400">AVM</p></div><div class="${kol.change >= 0 ? 'text-green-400' : 'text-red-400'}"><p class="font-bold ">${kol.change > 0 ? '+' : ''}${kol.change}%</p><p class="text-gray-400">月涨幅</p></div></div><div class="mt-6 flex space-x-2"><a href="#" class="flex-1 btn-secondary w-full py-2 rounded-lg font-semibold">主页</a><button class="flex-1 btn-primary w-full py-2 rounded-lg font-semibold text-white follow-btn">关注</button></div></div>
+                </div>`).join('');
+        }
+        function renderCommunityPosts() {
+            const container = document.getElementById('community-posts-container');
+            if (!container) return;
+            container.innerHTML = communityPosts.map(post => {
+                let footer = '';
+                if (post.type === 'discussion') { footer = `<span><i class="fas fa-comment-alt mr-1"></i> ${post.replies} 回复</span><span><i class="fas fa-user-friends mr-1"></i> ${post.participants} 参与</span>`; } 
+                else if (post.type === 'event') { footer = `<span><i class="fas fa-calendar-alt mr-1"></i> ${post.time}</span><span><i class="fab fa-discord mr-1"></i> ${post.platform}</span>`; } 
+                else if (post.type === 'update') { footer = `<span><i class="fas fa-user-circle mr-1"></i> ${post.kol}</span><span><i class="fas fa-clock mr-1"></i> ${post.timeAgo}</span>`; }
+                return `<div class="card rounded-xl p-6 flex flex-col justify-between transition hover:-translate-y-1"><div><div class="flex items-center mb-3"><span class="text-xs px-2 py-0.5 rounded-full font-semibold ${post.tagColor}">${post.tag}</span></div><h3 class="text-lg font-bold text-white hover:text-cyan-400 mb-2 leading-tight cursor-pointer">${post.title}</h3><p class="text-sm text-gray-400 line-clamp-3">${post.description}</p></div><div class="mt-4 pt-4 border-t border-gray-800 flex justify-between items-center text-xs text-gray-500">${footer}</div></div>`;
+            }).join('');
+        }
+        
+        // --- Event Listeners & Logic ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                if(mobileMenu.style.display === 'block') { mobileMenu.style.display = 'none'; }
+            });
+        });
 
-        // Valuation query button (unchanged)
-        const queryButton = document.querySelector('#discover-valuation button');
-        const queryInput = document.querySelector('#discover-valuation input');
-        if(queryButton && queryInput) { queryButton.addEventListener('click', () => { const kolIdentifier = queryInput.value.trim(); if(kolIdentifier) { alert(`正在查询 "${kolIdentifier}" 的估值... (此处应替换为实际API调用)`); } else { alert('请输入有效的社交媒体链接或名称进行查询。'); } }); }
-
-        // Language switcher (unchanged)
-        const langButton = document.getElementById('lang-switcher-button');
-        const langDropdown = document.getElementById('lang-dropdown');
-        if (langButton && langDropdown) { langButton.addEventListener('click', (event) => { event.stopPropagation(); const isExpanded = langButton.getAttribute('aria-expanded') === 'true'; langButton.setAttribute('aria-expanded', !isExpanded); langDropdown.style.display = isExpanded ? 'none' : 'block'; }); langDropdown.querySelectorAll('a').forEach(link => { link.addEventListener('click', (event) => { event.preventDefault(); const selectedLangDisplay = link.textContent; const selectedLangCode = link.getAttribute('data-lang'); langButton.querySelector('span').textContent = selectedLangDisplay; document.documentElement.lang = selectedLangCode; langButton.setAttribute('aria-expanded', 'false'); langDropdown.style.display = 'none'; alert(`语言已切换至 ${selectedLangDisplay} (静态示例，页面内容未改变)`); /* Actual i18n logic here */ }); }); document.addEventListener('click', () => { langButton.setAttribute('aria-expanded', 'false'); langDropdown.style.display = 'none'; }); langDropdown.addEventListener('click', (event) => { event.stopPropagation(); }); }
-
-        // Market Overview Tab Switching Logic (unchanged)
-        const marketTabsContainer = document.getElementById('market-tabs');
+        const marketTabs = document.getElementById('market-tabs');
         const marketContents = document.querySelectorAll('.market-content');
-        if (marketTabsContainer && marketContents.length > 0) { marketTabsContainer.addEventListener('click', (event) => { const clickedTab = event.target.closest('.market-tab'); if (!clickedTab) return; marketTabsContainer.querySelectorAll('.market-tab').forEach(tab => { tab.classList.remove('market-tab-active'); }); clickedTab.classList.add('market-tab-active'); marketContents.forEach(content => { content.classList.remove('market-content-active'); }); const targetId = clickedTab.getAttribute('data-target'); const targetContent = document.querySelector(targetId); if (targetContent) { targetContent.classList.add('market-content-active'); } }); }
+        marketTabs.addEventListener('click', (e) => {
+            const clickedTab = e.target.closest('.tab-btn');
+            if (!clickedTab) return;
+            marketTabs.querySelector('.active').classList.remove('active');
+            clickedTab.classList.add('active');
+            const targetId = clickedTab.dataset.target;
+            marketContents.forEach(content => {
+                content.classList.remove('active');
+                if ('#' + content.id === targetId) { content.classList.add('active'); }
+            });
+        });
+        
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+        });
 
-        // Placeholder for Realtime AVM Update Logic (unchanged)
-        function updateRealtimeAvmCard(kolData) { const container = document.getElementById('realtime-avm-container'); if (!container) return; let card = container.querySelector(`[data-kol-id="${kolData.id}"]`); if (!card) { card = document.createElement('div'); card.className = 'realtime-avm-card'; card.setAttribute('data-kol-id', kolData.id); card.innerHTML = `<div class="flex items-center justify-between mb-2"><span class="font-semibold text-lg kol-name"></span><span class="text-xs px-2 py-0.5 rounded-full status-badge"></span></div><div class="flex items-baseline justify-between"><span class="text-2xl font-bold text-white avm-score"></span><span class="text-lg font-semibold flex items-center change-indicator"><i class="change-icon fas mr-1"></i> <span class="change-value"></span><span class="text-xs text-gray-400 ml-2">(24h)</span></span></div>`; container.insertBefore(card, container.firstChild); if (container.children.length > 12) { container.removeChild(container.lastChild); } } card.querySelector('.kol-name').textContent = kolData.name + (kolData.status === 'new' ? ' (新)' : ''); card.querySelector('.avm-score').textContent = kolData.score; const statusBadge = card.querySelector('.status-badge'); const changeIndicator = card.querySelector('.change-indicator'); const changeIcon = card.querySelector('.change-icon'); const changeValue = card.querySelector('.change-value'); if (kolData.status === 'new') { statusBadge.textContent = '首次评估'; statusBadge.className = 'text-xs px-2 py-0.5 rounded-full bg-blue-600/20 text-blue-400 status-badge'; changeIndicator.classList.add('text-gray-400'); changeIndicator.classList.remove('text-buy', 'text-sell'); changeIcon.className = 'change-icon fas mr-1'; changeValue.textContent = '--'; } else { statusBadge.textContent = '实时更新'; statusBadge.className = 'text-xs px-2 py-0.5 rounded-full bg-green-600/20 text-green-400 status-badge'; const change = kolData.change24h; changeValue.textContent = `${change >= 0 ? '+' : ''}${change.toFixed(1)}%`; if (change > 0) { changeIndicator.classList.add('text-buy'); changeIndicator.classList.remove('text-sell', 'text-gray-400'); changeIcon.className = 'change-icon fas fa-arrow-up mr-1'; } else if (change < 0) { changeIndicator.classList.add('text-sell'); changeIndicator.classList.remove('text-buy', 'text-gray-400'); changeIcon.className = 'change-icon fas fa-arrow-down mr-1'; } else { changeIndicator.classList.add('text-gray-400'); changeIndicator.classList.remove('text-buy', 'text-sell'); changeIcon.className = 'change-icon fas fa-minus mr-1'; } } card.classList.add('animate-pulse'); setTimeout(() => card.classList.remove('animate-pulse'), 1000); }
+        const sortContainer = document.querySelector('#kol-token-market .flex');
+        sortContainer.addEventListener('click', (e) => {
+            const clickedButton = e.target.closest('.sort-btn');
+            if (clickedButton) {
+                sortContainer.querySelector('.active').classList.remove('active');
+                clickedButton.classList.add('active');
+                renderKolTokens(clickedButton.dataset.sort);
+            }
+        });
 
-        // Mock Realtime Data Update (unchanged)
-        // setInterval(() => { /* ... */ }, 3000);
+        // Modal Logic
+        const applyModal = document.getElementById('kol-apply-modal');
+        const communityModal = document.getElementById('community-modal');
+        const openModal = (modal) => modal.style.display = 'flex';
+        const closeModal = (modal) => modal.style.display = 'none';
 
+        document.querySelectorAll('#apply-kol-btn, #mobile-apply-kol-btn, #footer-apply-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => { e.preventDefault(); openModal(applyModal); });
+        });
+        document.getElementById('join-community-btn').addEventListener('click', (e) => {
+            e.preventDefault(); openModal(communityModal);
+        });
+
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', e => { if (e.target === modal) closeModal(modal); });
+            modal.querySelector('.modal-content').addEventListener('click', e => e.stopPropagation());
+        });
+        document.getElementById('close-apply-modal').addEventListener('click', () => closeModal(applyModal));
+        document.getElementById('close-community-modal').addEventListener('click', () => closeModal(communityModal));
+        
+        document.getElementById('kol-apply-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            closeModal(applyModal);
+            alert('您的申请已提交！我们会在审核后通过邮件与您联系。');
+            e.target.reset();
+        });
+        
+        // Follow Button Logic
+        document.getElementById('kol-list').addEventListener('click', function(e) {
+            const followButton = e.target.closest('.follow-btn');
+            if (followButton) {
+                if (!followButton.classList.contains('follow-btn-followed')) {
+                    followButton.textContent = '已关注';
+                    followButton.classList.add('follow-btn-followed');
+                    followButton.classList.remove('btn-primary');
+                }
+            }
+        });
+
+        // --- Initial Render ---
+        renderKolTokens();
+        renderNfts();
+        renderIndexes();
+        renderFeaturedKols();
+        renderCommunityPosts();
+    });
     </script>
-
 </body>
 </html>
