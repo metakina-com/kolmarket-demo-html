@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交易中心 - KOL Market</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        /* Add specific styles for the trade page based on the image */
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #2a2a2a;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #e0e0e0;
+        }
+        .header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .header nav ul li {
+            margin-left: 20px;
+        }
+        .header nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        .header nav ul li a:hover {
+            color: #4CAF50;
+        }
+        .container {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+        .left-sidebar {
+            width: 280px;
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .top-section {
+            display: flex;
+            gap: 20px;
+        }
+        .chart-area {
+            flex-grow: 1;
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #888;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .chart-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        .chart-header .title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e0e0e0;
+        }
+        .chart-header .controls button {
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .chart-header .controls button:hover {
+            background-color: #4CAF50;
+        }
+        .trading-panel {
+            width: 350px;
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .bottom-section {
+            display: flex;
+            gap: 20px;
+        }
+        .data-visualization-area {
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .data-card {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .data-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #e0e0e0;
+        }
+        .data-card .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-top: 10px;
+        }
+        .data-card .description {
+            font-size: 14px;
+            color: #aaa;
+        }
+        .community-feed {
+            width: 350px;
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .product-list h3, .trading-panel h3, .community-feed h3 {
+            margin-top: 0;
+            color: #e0e0e0;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .product-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        .product-item:hover {
+            background-color: #333;
+            border-radius: 4px;
+            padding-left: 5px;
+        }
+        .product-item .details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .product-item .name {
+            font-weight: bold;
+            color: #e0e0e0;
+        }
+        .product-item .price {
+            color: #4CAF50;
+            font-size: 15px;
+        }
+        .product-item .change {
+            font-size: 0.9em;
+            color: #FF5252;
+        }
+        .trading-panel label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+        .trading-panel input, .trading-panel button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: none;
+            font-size: 16px;
+        }
+        .trading-panel input {
+            background-color: #333;
+            color: #ffffff;
+        }
+        .trading-panel button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .trading-panel button:hover {
+            background-color: #45a049;
+        }
+        .trading-panel .sell-button {
+            background-color: #FF5252;
+        }
+        .trading-panel .sell-button:hover {
+            background-color: #e04b4b;
+        }
+        .order-book, .recent-trades {
+            margin-top: 20px;
+        }
+        .order-book table, .recent-trades table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .order-book th, .order-book td, .recent-trades th, .recent-trades td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+            color: #e0e0e0;
+        }
+        .order-book th, .recent-trades th {
+            color: #aaa;
+            font-weight: normal;
+        }
+        .order-book .buy-price {
+            color: #4CAF50;
+        }
+        .order-book .sell-price {
+            color: #FF5252;
+        }
+        .recent-trades .buy-trade {
+             color: #4CAF50;
+        }
+         .recent-trades .sell-trade {
+             color: #FF5252;
+        }
+        .kol-exclusive {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .kol-exclusive h3 {
+            color: #e0e0e0;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .kol-exclusive .info-item {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .kol-exclusive .info-item strong {
+            color: #e0e0e0;
+        }
+        .kol-exclusive .description {
+            font-size: 13px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+        .kol-exclusive .read-more {
+            display: block;
+            text-align: right;
+            margin-top: 10px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .community-feed .message-list {
+            max-height: 250px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-right: 10px;
+        }
+        .community-feed .message-item {
+            background-color: #333;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #e0e0e0;
+        }
+        .community-feed .message-item .author {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 5px;
+        }
+        .community-feed .message-input {
+            display: flex;
+            gap: 10px;
+        }
+        .community-feed .message-input input {
+            flex-grow: 1;
+            background-color: #333;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 8px;
+            color: #e0e0e0;
+        }
+        .community-feed .message-input button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #2a2a2a;
+            padding: 15px 20px;
+            text-align: center;
+            color: #aaa;
+            font-size: 14px;
+            border-top: 1px solid #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>KOL Market</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="trade.html">交易</a></li>
+                <li><a href="#">我的资产</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="left-sidebar">
+            <div class="product-list">
+                <h3>热门产品</h3>
+                <div class="product-item">
+                    <div class="details">
+                        <div class="name">DRLS</div>
+                        <div class="price">¥0.222000</div>
+                    </div>
+                    <div class="change">-0.001000 (-0.45%)</div>
+                </div>
+                <div class="product-item">
+                    <div class="details">
+                        <div class="name">DRWW</div>
+                        <div class="price">¥1.00061</div>
+                    </div>
+                    <div class="change">-0.00099 (-0.09%)</div>
+                </div>
+                 <div class="product-item">
+                    <div class="details">
+                        <div class="name">DRLL</div>
+                        <div class="price">¥170.742</div>
+                    </div>
+                    <div class="change">-12.471 (-6.80%)</div>
+                </div>
+                 <div class="product-item">
+                    <div class="details">
+                        <div class="name">DRQQ</div>
+                        <div class="price">¥2.1129</div>
+                    </div>
+                    <div class="change">-0.0973 (-4.40%)</div>
+                </div>
+                <div class="product-item">
+                    <div class="details">
+                        <div class="name">DRZS-5</div>
+                        <div class="price">¥57.02</div>
+                    </div>
+                    <div class="change" style="color: #4CAF50;">+0.82 (+1.46%)</div>
+                </div>
+                 <div class="product-item">
+                    <div class="details">
+                        <div class="name">DRZS-W</div>
+                        <div class="price">¥3.55</div>
+                    </div>
+                    <div class="change">-0.09 (-2.47%)</div>
+                </div>
+            </div>
+             <div class="product-list" style="margin-top: 20px;">
+                <h3>板块指数</h3>
+                <div class="product-item">
+                    <div class="details">
+                        <div class="name">美妆</div>
+                        <div class="price">2884</div>
+                    </div>
+                    <div class="change" style="color: #4CAF50;">+36.57 (+1.28%)</div>
+                </div>
+                 <div class="product-item">
+                    <div class="details">
+                        <div class="name">数码</div>
+                        <div class="price">1520</div>
+                    </div>
+                    <div class="change">-10.15 (-0.66%)</div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="top-section">
+                <div class="chart-area">
+                    <div class="chart-header">
+                        <div class="title">DRZS-S 实时图表</div>
+                        <div class="controls">
+                            <button>1m</button>
+                            <button>5m</button>
+                            <button>1h</button>
+                            <button>1D</button>
+                            <button>1W</button>
+                            <button>1M</button>
+                        </div>
+                    </div>
+                    <!-- TradingView Chart Widget Placeholder -->
+                    <p>交易图表将在此处显示</p>
+                </div>
+                <aside class="trading-panel">
+                    <h3>交易 DRZS-S</h3>
+                    <div>
+                        <label for="price">价格:</label>
+                        <input type="number" id="price" value="57.02" step="0.01">
+                    </div>
+                    <div>
+                        <label for="quantity">数量:</label>
+                        <input type="number" id="quantity" value="100" step="1">
+                    </div>
+                    <button>买入</button>
+                    <button class="sell-button">卖出</button>
+
+                    <div class="order-book">
+                        <h3>委托列表</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>价格</th>
+                                    <th>数量</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="sell-price">57.10</td><td>200</td></tr>
+                                <tr><td class="sell-price">57.05</td><td>150</td></tr>
+                                <tr><td class="buy-price">57.00</td><td>300</td></tr>
+                                <tr><td class="buy-price">56.95</td><td>250</td></tr>
+                                 <tr><td class="buy-price">56.90</td><td>180</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                     <div class="recent-trades">
+                        <h3>最新成交</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>价格</th>
+                                    <th>数量</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>14:30:15</td><td class="buy-trade">57.00</td><td>50</td></tr>
+                                <tr><td>14:29:50</td><td class="sell-trade">57.05</td><td>100</td></tr>
+                                <tr><td>14:28:30</td><td class="buy-trade">57.00</td><td>80</td></tr>
+                                 <tr><td>14:27:10</td><td class="buy-trade">56.95</td><td>120</td></tr>
+                                <tr><td>14:26:05</td><td class="sell-trade">57.10</td><td>70</td></tr>
+                                <tr><td>14:25:40</td><td class="buy-trade">56.98</td><td>90</td></tr>
+                                <tr><td>14:24:10</td><td class="sell-trade">57.03</td><td>60</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="bottom-section">
+                <div class="data-visualization-area">
+                    <div class="data-card">
+                        <h3>流通比率</h3>
+                        <div class="value">50%</div>
+                        <div class="description">KOL代币流通量占比</div>
+                    </div>
+                    <div class="data-card">
+                        <h3>活跃度</h3>
+                        <div class="value">86%</div>
+                        <div class="description">近24小时交易活跃度</div>
+                    </div>
+                    <div class="data-card">
+                        <h3>影响力指数</h3>
+                        <div class="value">+45%</div>
+                        <div class="description">近7天影响力增长</div>
+                    </div>
+                    <div class="data-card">
+                        <h3>新增粉丝量</h3>
+                        <div class="value">2500</div>
+                        <div class="description">近30天新增粉丝</div>
+                    </div>
+                    <div class="data-card">
+                        <h3>累计粉丝量</h3>
+                        <div class="value">12.5万</div>
+                        <div class="description">KOL总粉丝数量</div>
+                    </div>
+                </div>
+                <aside class="community-feed">
+                    <h3>社区动态</h3>
+                    <div class="message-list">
+                        <div class="message-item">
+                            <div class="author">达人张三 <span style="color: #aaa; font-size: 12px;">22 min ago</span></div>
+                            <div>感谢老铁支持</div>
+                        </div>
+                        <div class="message-item">
+                            <div class="author">待气的我 <span style="color: #aaa; font-size: 12px;">12 min ago</span></div>
+                            <div>不必客气，我刚才买了10份广告权益，打算请你发多条广告，下面有档期吗？</div>
+                        </div>
+                        <div class="message-item">
+                            <div class="author">达人张三 <span style="color: #aaa; font-size: 12px;">5 min ago</span></div>
+                            <div>好的，档期可以安排，请私聊我具体需求。</div>
+                        </div>
+                        <div class="message-item">
+                            <div class="author">KOL观察员 <span style="color: #aaa; font-size: 12px;">刚刚</span></div>
+                            <div>DRZS-S 今日表现强劲，值得关注！</div>
+                        </div>
+                    </div>
+                    <div class="message-input">
+                        <input type="text" placeholder="输入消息...">
+                        <button>发送</button>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="kol-exclusive">
+                <h3>达人账号专属</h3>
+                <div class="info-item"><strong>KOL:</strong> 达人张三</div>
+                <div class="info-item"><strong>发行资产:</strong> 2000份广告权益</div>
+                <div class="info-item"><strong>最低行权兑换时长:</strong> 6秒</div>
+                <div class="description">
+                    达人张三在考拉达人交易所发行了2000份广告权益，最低行权兑换时长为6秒。广告内容需与博主账号调性一致，以美妆内容为主，旨在为品牌提供精准、优质的曝光机会。该权益的有效期为一年，逾期未使用的权益凭证将自动转化为博主的数字藏品，赋予收藏价值和潜在的增值空间。
+                </div>
+                <a href="#" class="read-more">点击查看详情</a>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 KOL Market. All rights reserved.</p>
+    </footer>
+</body>
+</html>
